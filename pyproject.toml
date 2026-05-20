@@ -1,0 +1,10 @@
+[project]
+name = "sauce-demo-ui-framework"
+version = "0.1.0"
+description = "UI automation framework for Sauce Demo"
+authors = ["Automated Framework"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+addopts = "-q"
+testpaths = ["tests"]
