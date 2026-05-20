@@ -2,7 +2,7 @@ name: Python Playwright Tests
 
 on:
   push:
-    branches: [main, master, test_branch]
+    branches: [main, master, test_branch, sauce_demo_automation]
   pull_request:
 
 jobs:
