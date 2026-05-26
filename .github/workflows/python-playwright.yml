@@ -22,4 +22,20 @@ jobs:
           playwright install
       - name: Run tests
         run: |
-          pytest
+          pytest --junitxml=reports/junit.xml --html=reports/report.html --self-contained-html
+
+      - name: Publish JUnit report to GitHub Test Reporter
+        uses: dorny/test-reporter@v1
+        with:
+          name: pytest
+          path: reports/junit.xml
+          reporter: junit
+
+      - name: Upload HTML report and screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            reports/report.html
+            reports/junit.xml
+            reports/screenshots
