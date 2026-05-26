@@ -1,4 +1,4 @@
-from playwright.sync_api import Page
+from playwright.sync_api import Locator, Page
 
 class BasePage:
     def __init__(self, page: Page):
@@ -7,14 +7,19 @@ class BasePage:
     def goto(self, url: str):
         self.page.goto(url)
 
-    def fill(self, selector: str, value: str):
-        self.page.fill(selector, value)
+    def locator(self, selector: str | Locator):
+        if isinstance(selector, Locator):
+            return selector
+        return self.page.locator(selector)
 
-    def click(self, selector: str):
-        self.page.click(selector)
+    def fill(self, selector: str | Locator, value: str):
+        self.locator(selector).fill(value)
 
-    def text_content(self, selector: str) -> str:
-        return self.page.text_content(selector) or ""
+    def click(self, selector: str | Locator):
+        self.locator(selector).click()
 
-    def is_visible(self, selector: str) -> bool:
-        return self.page.is_visible(selector)
+    def text_content(self, selector: str | Locator) -> str:
+        return self.locator(selector).text_content() or ""
+
+    def is_visible(self, selector: str | Locator) -> bool:
+        return self.locator(selector).is_visible()

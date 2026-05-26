@@ -6,5 +6,5 @@ authors = ["Automated Framework"]
 
 [tool.pytest.ini_options]
 minversion = "7.0"
-addopts = "-q"
+addopts = "-q --html=reports/report.html --self-contained-html --junitxml=reports/junit.xml"
 testpaths = ["tests"]
